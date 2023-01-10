@@ -1,20 +1,11 @@
 package com.kasir.application.dto;
 
 public class AddProductDto {
-    private String image;
     private String name;
     private String description;
     private Double price;
     private Long stock;
     private Long categoryId;
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getName() {
         return name;
