@@ -92,4 +92,8 @@ public class CartService {
         User user = userRepository.findByEmail(authentication.getName());
         return cartRepository.deleteByUser(user);
     }
+
+    public List<Cart> searchCart(String product, String user) {
+        return cartRepository.findByUser(product, user);
+    }
 }

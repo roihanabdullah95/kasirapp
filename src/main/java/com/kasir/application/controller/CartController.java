@@ -29,6 +29,12 @@ public class CartController {
         return new ResponseEntity<>(cartDto, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/search")
+    public ResponseEntity<?> searchCart(@RequestParam("product") String product, @RequestParam("user") String user) {
+        List<Cart> carts = cartService.searchCart(product, user);
+        return new ResponseEntity<>(carts, HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> addCart(@RequestBody AddCartDto addCartDto, Authentication authentication) throws Exception {
         Product product = productService.getProductById(addCartDto.getProductId());

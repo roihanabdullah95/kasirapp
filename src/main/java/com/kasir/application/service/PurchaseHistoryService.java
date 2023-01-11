@@ -37,6 +37,7 @@ public class PurchaseHistoryService {
             p.setProduct(product);
             p.setCreatedAt(new Date());
             product.setStock(product.getStock() - p.getTotalProduct());
+            product.setJumlahTerjual(product.getJumlahTerjual() + p.getTotalProduct());
             products.add(product);
         }
         productRepository.saveAll(products);

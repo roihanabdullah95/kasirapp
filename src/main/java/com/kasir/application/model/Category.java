@@ -12,6 +12,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String icon;
 
     @JsonIgnore
     @ManyToOne
@@ -36,6 +37,14 @@ public class Category {
         this.name = name;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     public List<Product> getProduct() {
         return product;
     }
@@ -51,4 +60,5 @@ public class Category {
     public void setUser(User user) {
         this.user = user;
     }
+
 }

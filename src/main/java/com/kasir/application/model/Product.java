@@ -16,6 +16,7 @@ public class Product {
     private String name;
     private Double price;
     private Long stock;
+    private Long jumlahTerjual = Long.valueOf(0);
     @Lob
     private String description;
 
@@ -78,6 +79,14 @@ public class Product {
 
     public void setStock(Long stock) {
         this.stock = stock;
+    }
+
+    public Long getJumlahTerjual() {
+        return jumlahTerjual;
+    }
+
+    public void setJumlahTerjual(Long jumlahTerjual) {
+        this.jumlahTerjual = jumlahTerjual;
     }
 
     public String getDescription() {
