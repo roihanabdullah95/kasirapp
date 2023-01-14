@@ -16,6 +16,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private Long totalPesanan = 0L;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
@@ -59,6 +60,14 @@ public class User {
     @JsonProperty
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getTotalPesanan() {
+        return totalPesanan;
+    }
+
+    public void setTotalPesanan(Long totalPesanan) {
+        this.totalPesanan = totalPesanan;
     }
 
     public List<Toko> getToko() {

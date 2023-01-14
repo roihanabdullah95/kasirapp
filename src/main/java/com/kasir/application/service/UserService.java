@@ -21,6 +21,10 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public User getUserId(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
@@ -53,6 +57,7 @@ public class UserService implements UserDetailsService {
         if (PasswordIsNotValid) throw new Exception("Password not valid!");
         if (userExists(user)) throw new Exception("User already exists!");
 
+        user.setTotalPesanan(0L);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }

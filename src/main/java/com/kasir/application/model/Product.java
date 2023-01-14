@@ -3,6 +3,7 @@ package com.kasir.application.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,14 +17,15 @@ public class Product {
     private String name;
     private Double price;
     private Long stock;
-    private Long jumlahTerjual = Long.valueOf(0);
+    private Long jumlahTerjual = 0L;
     @Lob
     private String description;
+    private Date createdAt;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     private Category category;
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     private User user;
     @JsonIgnore
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
@@ -39,6 +41,7 @@ public class Product {
         this.stock = stock;
         this.description = description;
         this.category = category;
+        this.createdAt = new Date();
     }
 
     public Long getId() {

@@ -31,6 +31,7 @@ public class PurchaseHistoryService {
     public List<PurchaseHistory> addPurchaseHistory(List<PurchaseHistory> purchaseHistory, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         List<Product> products = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         for (PurchaseHistory p : purchaseHistory) {
             Product product = productRepository.findById(p.getProduct().getId()).orElse(null);
             p.setUser(user);
@@ -40,7 +41,10 @@ public class PurchaseHistoryService {
             product.setJumlahTerjual(product.getJumlahTerjual() + p.getTotalProduct());
             products.add(product);
         }
+        user.setTotalPesanan(user.getTotalPesanan() + 1);
+        userList.add(user);
         productRepository.saveAll(products);
+        userRepository.saveAll(userList);
         return purchaseHistoryRepository.saveAll(purchaseHistory);
     }
 

@@ -39,6 +39,12 @@ public class UserController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserId(@PathVariable("id") Long id) {
+        User user = userService.getUserId(id);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
     @PostMapping(path = "/register", consumes = "application/json")
     public ResponseEntity<?> register(@RequestBody User user) throws Exception {
         User newUser = userService.createUser(user);
