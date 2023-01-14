@@ -56,20 +56,16 @@ public class ProductService {
         return productRepository.save(products);
     }
 
-    public Product updateProduct(Long id, Product product, Authentication authentication) throws Exception {
+    public Product updateProduct(Long id, AddProductDto addProductDto, Authentication authentication) throws Exception {
         User user = userRepository.findByEmail(authentication.getName());
         Product products = productRepository.findById(id).orElse(null);
-        if (product == null) {
-            throw new Exception("Product not found!!!");
-        }
         if (!user.equals(products.getUser())) {
             throw new Exception("No permission to update this product!!!");
         }
-        products.setName(product.getName());
-        products.setDescription(product.getDescription());
-        products.setImage(product.getImage());
-        products.setPrice(product.getPrice());
-        products.setStock(product.getStock());
+        products.setName(addProductDto.getName());
+        products.setDescription(addProductDto.getDescription());
+        products.setPrice(addProductDto.getPrice());
+        products.setStock(addProductDto.getStock());
         return productRepository.save(products);
     }
 

@@ -43,8 +43,8 @@ public class ProductController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable("id") Long id, @RequestBody Product product, Authentication authentication) throws Exception {
-        Product products = productService.updateProduct(id, product, authentication);
+    public ResponseEntity<?> updateProduct(@PathVariable("id") Long id, @RequestBody AddProductDto addProductDto, Authentication authentication) throws Exception {
+        Product products = productService.updateProduct(id, addProductDto, authentication);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

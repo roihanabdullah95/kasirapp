@@ -100,6 +100,14 @@ public class Product {
         this.description = description;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Category getCategory() {
         return category;
     }
