@@ -18,9 +18,9 @@ public class User {
     private String password;
     private Long totalPesanan = 0L;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private List<Toko> toko;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @PrimaryKeyJoinColumn
+    private Toko toko;
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Product> product;
@@ -70,11 +70,11 @@ public class User {
         this.totalPesanan = totalPesanan;
     }
 
-    public List<Toko> getToko() {
+    public Toko getToko() {
         return toko;
     }
 
-    public void setToko(List<Toko> toko) {
+    public void setToko(Toko toko) {
         this.toko = toko;
     }
 

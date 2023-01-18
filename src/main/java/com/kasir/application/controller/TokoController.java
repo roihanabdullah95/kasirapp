@@ -19,7 +19,7 @@ public class TokoController {
 
     @GetMapping(path = "/all")
     public ResponseEntity<?> getAllTokoByUser(Authentication authentication) {
-        List<Toko> toko = tokoService.getAllToko(authentication);
+        Toko toko = tokoService.getAllToko(authentication);
         return new ResponseEntity<>(toko, HttpStatus.OK);
     }
 

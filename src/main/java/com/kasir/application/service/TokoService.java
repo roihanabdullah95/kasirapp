@@ -18,7 +18,7 @@ public class TokoService {
     @Autowired
     UserRepository userRepository;
 
-    public List<Toko> getAllToko(Authentication authentication) {
+    public Toko getAllToko(Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         return tokoRepository.getTokoByUser(user);
     }
@@ -45,6 +45,8 @@ public class TokoService {
             throw new Exception("No permission to update this toko!!!");
         }
         toko1.setName(toko.getName());
+        toko1.setPhoneNumber(toko.getPhoneNumber());
+        toko1.setAddress(toko.getAddress());
         return tokoRepository.save(toko1);
     }
 
