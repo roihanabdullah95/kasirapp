@@ -1,6 +1,5 @@
 package com.kasir.application.service;
 
-import com.kasir.application.model.Category;
 import com.kasir.application.model.Toko;
 import com.kasir.application.model.User;
 import com.kasir.application.repository.TokoRepository;
@@ -8,8 +7,6 @@ import com.kasir.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TokoService {
@@ -59,6 +56,7 @@ public class TokoService {
         if (!user.equals(toko.getUser())) {
             throw new Exception("No permission to delete this toko!!!");
         }
+        tokoRepository.delete(toko);
         return toko;
     }
 }
