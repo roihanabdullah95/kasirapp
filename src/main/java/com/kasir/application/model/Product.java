@@ -21,6 +21,9 @@ public class Product {
     @Lob
     private String description;
     private Date createdAt;
+    private int createdDay;
+    private String createdMonth;
+    private int createdYear;
 
     @ManyToOne
     private Category category;
@@ -106,6 +109,30 @@ public class Product {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public int getCreatedDay() {
+        return createdDay;
+    }
+
+    public void setCreatedDay(int createdDay) {
+        this.createdDay = createdDay;
+    }
+
+    public String getCreatedMonth() {
+        return createdMonth;
+    }
+
+    public void setCreatedMonth(String createdMonth) {
+        this.createdMonth = createdMonth;
+    }
+
+    public int getCreatedYear() {
+        return createdYear;
+    }
+
+    public void setCreatedYear(int createdYear) {
+        this.createdYear = createdYear;
     }
 
     public Category getCategory() {

@@ -24,6 +24,11 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.Year;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -62,9 +67,14 @@ public class ProductService {
     }
 
     public Product addProduct(AddProductDto addProductDto, MultipartFile multipartFile, Authentication authentication, Category category) throws Exception {
+        Date date = new Date();
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         User user = userRepository.findByEmail(authentication.getName());
         String image = imageConverter(multipartFile);
         Product products = new Product(image, addProductDto.getName(), addProductDto.getPrice(), addProductDto.getStock(), addProductDto.getDescription(), category);
+        products.setCreatedDay(LocalDate.now().getDayOfMonth());
+        products.setCreatedMonth(months[date.getMonth()]);
+        products.setCreatedYear(Year.now().getValue());
         products.setUser(user);
         return productRepository.save(products);
     }

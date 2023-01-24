@@ -13,6 +13,10 @@ public class PurchaseHistory {
     private Long totalProduct;
     private Double totalPrice;
     private Date createdAt;
+    private int createdDay;
+    private String createdMonth;
+    private int createdYear;
+
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "productId")
     private Product product;
@@ -50,6 +54,30 @@ public class PurchaseHistory {
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public int getCreatedDay() {
+        return createdDay;
+    }
+
+    public void setCreatedDay(int createdDay) {
+        this.createdDay = createdDay;
+    }
+
+    public String getCreatedMonth() {
+        return createdMonth;
+    }
+
+    public void setCreatedMonth(String createdMonth) {
+        this.createdMonth = createdMonth;
+    }
+
+    public int getCreatedYear() {
+        return createdYear;
+    }
+
+    public void setCreatedYear(int createdYear) {
+        this.createdYear = createdYear;
     }
 
     public Product getProduct() {
