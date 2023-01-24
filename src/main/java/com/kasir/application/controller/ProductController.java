@@ -3,6 +3,8 @@ package com.kasir.application.controller;
 import com.kasir.application.dto.AddProductDto;
 import com.kasir.application.model.Category;
 import com.kasir.application.model.Product;
+import com.kasir.application.payload.response.CommonResponse;
+import com.kasir.application.payload.response.ResponseHelper;
 import com.kasir.application.service.CategoryService;
 import com.kasir.application.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,23 @@ public class ProductController {
     ProductService productService;
     @Autowired
     CategoryService categoryService;
+
+    @GetMapping
+    public CommonResponse<List<Product>> searchProduct(@RequestParam("name") String name) {
+        return ResponseHelper.ok(productService.findProductByName(name));
+    }
+
+    @GetMapping(path = "/popular")
+    public ResponseEntity<?> findAllOrderByJumlahTejualDesc() {
+        List<Product> products = productService.findAllOrderByJumlahTejualDesc();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/time-added")
+    public ResponseEntity<?> findAllOrderByCreatedAtDesc() {
+        List<Product> products = productService.findAllOrderByCreatedAtDesc();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 
     @GetMapping(path = "/all")
     public ResponseEntity<?> getAllProductByUser(Authentication authentication) {

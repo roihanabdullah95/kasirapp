@@ -42,10 +42,23 @@ public class ProductService {
         return productRepository.getProductByUser(user);
     }
 
+    public List<Product> findProductByName(String name) {
+        List<Product> products = productRepository.findByName(name);
+        return products;
+    }
+
     public Product getProductById(Long id) throws Exception{
         Product product = productRepository.findById(id).orElse(null);
         if (product == null) throw new Exception("Product not found!!!");
         return product;
+    }
+
+    public List<Product> findAllOrderByJumlahTejualDesc() {
+        return productRepository.findAllOrderByJumlahTerjualDesc();
+    }
+
+    public List<Product> findAllOrderByCreatedAtDesc() {
+        return productRepository.findAllOrderByCreatedAtDesc();
     }
 
     public Product addProduct(AddProductDto addProductDto, MultipartFile multipartFile, Authentication authentication, Category category) throws Exception {

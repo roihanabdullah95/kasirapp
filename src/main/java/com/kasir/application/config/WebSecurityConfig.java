@@ -57,6 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/user/register",
             "/api/user/{id}",
             "/api/sidebar/all",
+            "/api/product/popular",
+            "/api/product/time-added",
     };
 
     @Override
