@@ -28,6 +28,10 @@ public class PurchaseHistoryService {
         return purchaseHistoryRepository.findByUser(user);
     }
 
+    public List<PurchaseHistory> findAllOrderByCreatedAtDesc() {
+        return purchaseHistoryRepository.findAllOrderByCreatedAtDesc();
+    }
+
     public List<PurchaseHistory> addPurchaseHistory(List<PurchaseHistory> purchaseHistory, Authentication authentication) {
         User user = userRepository.findByEmail(authentication.getName());
         List<Product> products = new ArrayList<>();

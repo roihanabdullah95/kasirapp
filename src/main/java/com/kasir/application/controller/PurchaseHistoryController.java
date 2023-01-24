@@ -1,5 +1,6 @@
 package com.kasir.application.controller;
 
+import com.kasir.application.model.Product;
 import com.kasir.application.model.PurchaseHistory;
 import com.kasir.application.service.PurchaseHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,12 @@ public class PurchaseHistoryController {
     @GetMapping(path = "/list")
     public ResponseEntity<?> PurchaseHistoryList(Authentication authentication) {
         List<PurchaseHistory> purchaseHistories = purchaseHistoryService.getPurchaseHistory(authentication);
+        return new ResponseEntity<>(purchaseHistories, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/time-added")
+    public ResponseEntity<?> findAllOrderByCreatedAtDesc() {
+        List<PurchaseHistory> purchaseHistories = purchaseHistoryService.findAllOrderByCreatedAtDesc();
         return new ResponseEntity<>(purchaseHistories, HttpStatus.OK);
     }
 
