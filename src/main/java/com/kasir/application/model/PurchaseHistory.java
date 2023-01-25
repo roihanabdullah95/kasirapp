@@ -14,7 +14,7 @@ public class PurchaseHistory {
     private Double totalPrice;
     private Date createdAt;
     private int createdDay;
-    private String createdMonth;
+    private int createdMonth;
     private int createdYear;
 
     @ManyToOne(cascade = CascadeType.DETACH)
@@ -64,11 +64,11 @@ public class PurchaseHistory {
         this.createdDay = createdDay;
     }
 
-    public String getCreatedMonth() {
+    public int getCreatedMonth() {
         return createdMonth;
     }
 
-    public void setCreatedMonth(String createdMonth) {
+    public void setCreatedMonth(int createdMonth) {
         this.createdMonth = createdMonth;
     }
 

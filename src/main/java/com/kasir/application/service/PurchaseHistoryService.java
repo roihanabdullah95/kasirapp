@@ -36,7 +36,6 @@ public class PurchaseHistoryService {
 
     public List<PurchaseHistory> addPurchaseHistory(List<PurchaseHistory> purchaseHistory, Authentication authentication) {
         Date date = new Date();
-        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         User user = userRepository.findByEmail(authentication.getName());
         List<Product> products = new ArrayList<>();
         List<User> userList = new ArrayList<>();
@@ -46,7 +45,7 @@ public class PurchaseHistoryService {
             p.setProduct(product);
             p.setCreatedAt(new Date());
             p.setCreatedDay(LocalDate.now().getDayOfMonth());
-            p.setCreatedMonth(months[date.getMonth()]);
+            p.setCreatedMonth(date.getMonth());
             p.setCreatedYear(Year.now().getValue());
             product.setStock(product.getStock() - p.getTotalProduct());
             product.setJumlahTerjual(product.getJumlahTerjual() + p.getTotalProduct());
