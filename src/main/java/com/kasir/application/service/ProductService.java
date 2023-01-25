@@ -13,6 +13,7 @@ import com.kasir.application.model.User;
 import com.kasir.application.repository.ProductRepository;
 import com.kasir.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,12 +46,14 @@ public class ProductService {
         return productRepository.getProductByUser(user);
     }
 
-    public List<Product> findAllOrderByJumlahTejualDesc() {
-        return productRepository.findAllOrderByJumlahTerjualDesc();
+    public List<Product> findAllOrderByJumlahTejualDesc(Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName());
+        return productRepository.findProductPopularByUser(user, Sort.by("jumlahTerjual").descending());
     }
 
-    public List<Product> findAllOrderByCreatedAtDesc() {
-        return productRepository.findAllOrderByCreatedAtDesc();
+    public List<Product> findAllOrderByCreatedAtDesc(Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName());
+        return productRepository.findProductTimeAddedByUser(user, Sort.by("createdAt").descending());
     }
 
     public List<Product> findProductByName(String name) {

@@ -37,14 +37,14 @@ public class ProductController {
     }
 
     @GetMapping(path = "/popular")
-    public ResponseEntity<?> findAllOrderByJumlahTejualDesc() {
-        List<Product> products = productService.findAllOrderByJumlahTejualDesc();
+    public ResponseEntity<?> findAllOrderByJumlahTejualDesc(Authentication authentication) {
+        List<Product> products = productService.findAllOrderByJumlahTejualDesc(authentication);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
     @GetMapping(path = "/time-added")
-    public ResponseEntity<?> findAllOrderByCreatedAtDesc() {
-        List<Product> products = productService.findAllOrderByCreatedAtDesc();
+    public ResponseEntity<?> findAllOrderByCreatedAtDesc(Authentication authentication) {
+        List<Product> products = productService.findAllOrderByCreatedAtDesc(authentication);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

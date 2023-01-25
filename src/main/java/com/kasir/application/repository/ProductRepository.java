@@ -2,6 +2,7 @@ package com.kasir.application.repository;
 
 import com.kasir.application.model.Product;
 import com.kasir.application.model.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -14,9 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.name LIKE CONCAT('%',:name, '%')")
     List<Product> findByName(String name);
 
-    @Query("FROM Product ORDER BY jumlah_terjual DESC")
-    List<Product> findAllOrderByJumlahTerjualDesc();
-    @Query("FROM Product ORDER BY created_at DESC")
-    List<Product> findAllOrderByCreatedAtDesc();
-
+    List<Product> findProductPopularByUser(User user, Sort jumlahTerjual);
+    List<Product> findProductTimeAddedByUser(User user, Sort createdAt);
 }
