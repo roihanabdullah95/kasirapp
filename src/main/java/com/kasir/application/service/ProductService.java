@@ -24,10 +24,8 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Year;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +45,14 @@ public class ProductService {
         return productRepository.getProductByUser(user);
     }
 
+    public List<Product> findAllOrderByJumlahTejualDesc() {
+        return productRepository.findAllOrderByJumlahTerjualDesc();
+    }
+
+    public List<Product> findAllOrderByCreatedAtDesc() {
+        return productRepository.findAllOrderByCreatedAtDesc();
+    }
+
     public List<Product> findProductByName(String name) {
         List<Product> products = productRepository.findByName(name);
         return products;
@@ -56,14 +62,6 @@ public class ProductService {
         Product product = productRepository.findById(id).orElse(null);
         if (product == null) throw new Exception("Product not found!!!");
         return product;
-    }
-
-    public List<Product> findAllOrderByJumlahTejualDesc() {
-        return productRepository.findAllOrderByJumlahTerjualDesc();
-    }
-
-    public List<Product> findAllOrderByCreatedAtDesc() {
-        return productRepository.findAllOrderByCreatedAtDesc();
     }
 
     public Product addProduct(AddProductDto addProductDto, MultipartFile multipartFile, Authentication authentication, Category category) throws Exception {

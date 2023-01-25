@@ -38,6 +38,7 @@ public class UserService implements UserDetailsService {
                 throw new InternalErrorException("Email & password must be filled!");
             if (email.isEmpty()) throw new InternalErrorException("Email must be filled!");
             if (password.isEmpty()) throw new InternalErrorException("Password must be filled!");
+
             throw new InternalErrorException("Email or password not found!");
         }
     }

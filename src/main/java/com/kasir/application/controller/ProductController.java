@@ -30,6 +30,12 @@ public class ProductController {
         return ResponseHelper.ok(productService.findProductByName(name));
     }
 
+    @GetMapping(path = "/all")
+    public ResponseEntity<?> getAllProductByUser(Authentication authentication) {
+        List<Product> products = productService.getAllProduct(authentication);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
     @GetMapping(path = "/popular")
     public ResponseEntity<?> findAllOrderByJumlahTejualDesc() {
         List<Product> products = productService.findAllOrderByJumlahTejualDesc();
@@ -39,12 +45,6 @@ public class ProductController {
     @GetMapping(path = "/time-added")
     public ResponseEntity<?> findAllOrderByCreatedAtDesc() {
         List<Product> products = productService.findAllOrderByCreatedAtDesc();
-        return new ResponseEntity<>(products, HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/all")
-    public ResponseEntity<?> getAllProductByUser(Authentication authentication) {
-        List<Product> products = productService.getAllProduct(authentication);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
