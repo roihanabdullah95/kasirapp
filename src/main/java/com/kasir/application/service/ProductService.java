@@ -7,6 +7,7 @@ import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import com.kasir.application.dto.AddProductDto;
+import com.kasir.application.exception.InternalErrorException;
 import com.kasir.application.model.Category;
 import com.kasir.application.model.Product;
 import com.kasir.application.model.User;
@@ -56,8 +57,9 @@ public class ProductService {
         return productRepository.findProductTimeAddedByUser(user, Sort.by("createdAt").descending());
     }
 
-    public List<Product> findProductByName(String name) {
-        List<Product> products = productRepository.findByName(name);
+    public List<Product> findProductByName(Long user, String name) {
+        User users = userRepository.findById(user).orElseThrow(() -> new InternalErrorException("Id not found!"));
+        List<Product> products = productRepository.findByName(users, name);
         return products;
     }
 

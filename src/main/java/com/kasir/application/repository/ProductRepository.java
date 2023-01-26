@@ -12,8 +12,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> getProductByUser(User user);
 
     @Query("SELECT p FROM Product p WHERE " +
-            "p.name LIKE CONCAT('%',:name, '%')")
-    List<Product> findByName(String name);
+            "p.name LIKE CONCAT('%',:name, '%') and p.user LIKE CONCAT('%',:user, '%')")
+    List<Product> findByName(User user, String name);
 
     List<Product> findProductPopularByUser(User user, Sort jumlahTerjual);
     List<Product> findProductTimeAddedByUser(User user, Sort createdAt);

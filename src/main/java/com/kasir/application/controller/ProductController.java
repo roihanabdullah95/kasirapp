@@ -26,8 +26,8 @@ public class ProductController {
     CategoryService categoryService;
 
     @GetMapping
-    public CommonResponse<List<Product>> searchProduct(@RequestParam("name") String name) {
-        return ResponseHelper.ok(productService.findProductByName(name));
+    public CommonResponse<List<Product>> searchProduct(@RequestParam("user") Long user, @RequestParam("name") String name) {
+        return ResponseHelper.ok(productService.findProductByName(user, name));
     }
 
     @GetMapping(path = "/all")
