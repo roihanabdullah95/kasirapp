@@ -61,11 +61,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/product/time-added",
     };
 
+    private static final String[] AUTH_AUTHORIZATION = {
+            "/api/category/**",
+            "/api/toko/**",
+            "/api/product/**",
+            "/api/cart/**",
+            "/api/history/**",
+    };
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable()
                 .authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
-                .antMatchers("/api/category/**", "/api/toko/**", "/api/product/**", "/api/cart/**", "/api/history/**")
+                .antMatchers(AUTH_AUTHORIZATION)
                 .authenticated().and()
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
