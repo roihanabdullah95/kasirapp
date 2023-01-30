@@ -44,6 +44,7 @@ public class CategoryService {
             throw new Exception("No permission to update this category!!!");
         }
         categories.setName(category.getName());
+        categories.setIcon(category.getIcon());
         return categoryRepository.save(categories);
     }
 
@@ -56,6 +57,7 @@ public class CategoryService {
         if (!user.equals(categories.getUser())) {
             throw new Exception("No permission to delete this category!!!");
         }
+        categoryRepository.deleteById(id);
         return categories;
     }
 }
