@@ -7,6 +7,7 @@ import com.kasir.application.repository.ProductRepository;
 import com.kasir.application.repository.PurchaseHistoryRepository;
 import com.kasir.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +31,9 @@ public class PurchaseHistoryService {
         return purchaseHistoryRepository.findByUser(user);
     }
 
-    public List<PurchaseHistory> findAllOrderByCreatedAtDesc() {
-        return purchaseHistoryRepository.findAllOrderByCreatedAtDesc();
+    public List<PurchaseHistory> findAllOrderByCreatedAtDesc(Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName());
+        return purchaseHistoryRepository.findPurchaseHistoryTimeAddedByUser(user, Sort.by("createdAt").descending());
     }
 
     public List<PurchaseHistory> addPurchaseHistory(List<PurchaseHistory> purchaseHistory, Authentication authentication) {

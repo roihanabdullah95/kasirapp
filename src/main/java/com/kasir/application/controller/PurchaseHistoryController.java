@@ -25,8 +25,8 @@ public class PurchaseHistoryController {
     }
 
     @GetMapping(path = "/time-added")
-    public ResponseEntity<?> findAllOrderByCreatedAtDesc() {
-        List<PurchaseHistory> purchaseHistories = purchaseHistoryService.findAllOrderByCreatedAtDesc();
+    public ResponseEntity<?> findAllOrderByCreatedAtDesc(Authentication authentication) {
+        List<PurchaseHistory> purchaseHistories = purchaseHistoryService.findAllOrderByCreatedAtDesc(authentication);
         return new ResponseEntity<>(purchaseHistories, HttpStatus.OK);
     }
 
