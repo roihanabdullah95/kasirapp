@@ -1,5 +1,7 @@
 package com.kasir.application.controller;
 
+import com.kasir.application.dto.AddProductDto;
+import com.kasir.application.dto.TokoDto;
 import com.kasir.application.model.Toko;
 import com.kasir.application.service.TokoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,15 +32,15 @@ public class TokoController {
         return new ResponseEntity<>(toko, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/add", consumes = "application/json")
-    public ResponseEntity<?> addToko(@RequestBody Toko toko, Authentication authentication) throws Exception {
-        Toko toko1 = tokoService.addToko(toko, authentication);
+    @PostMapping(path = "/add", consumes = "multipart/form-data")
+    public ResponseEntity<?> addToko(@RequestPart("file") MultipartFile multipartFile, TokoDto tokoDto, Authentication authentication) throws Exception {
+        Toko toko1 = tokoService.addToko(tokoDto, multipartFile, authentication);
         return new ResponseEntity<>(toko1, HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/{id}", consumes = "application/json")
-    public ResponseEntity<?> updateToko(@PathVariable("id") Long id, @RequestBody Toko toko, Authentication authentication) throws Exception {
-        Toko toko1 = tokoService.updateToko(id, toko, authentication);
+    @PutMapping(path = "/{id}", consumes = "multipart/form-data")
+    public ResponseEntity<?> updateToko(@PathVariable("id") Long id, @RequestPart("file") MultipartFile multipartFile, TokoDto tokoDto, Authentication authentication) throws Exception {
+        Toko toko1 = tokoService.updateToko(id, tokoDto, multipartFile, authentication);
         return new ResponseEntity<>(toko1, HttpStatus.OK);
     }
 
